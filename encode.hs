@@ -3,14 +3,19 @@
 import Data.Char
 
 
-int2let :: Int -> Char
-int2let n = toEnum (n + fromEnum 'a')::Char
+int2letLower :: Int -> Char
+int2letLower n = toEnum (n + fromEnum 'a')::Char
+
+int2letUpper :: Int -> Char
+int2letUpper n = toEnum (n + fromEnum 'A')::Char
 
 let2int :: Char -> Int
-let2int c = fromEnum c - fromEnum 'a'
+let2int c | Data.Char.isLower c = fromEnum c - fromEnum 'a'
+          | Data.Char.isUpper c = fromEnum c - fromEnum 'A'
 
 encodeChar :: Int -> Char -> Char
-encodeChar n c | Data.Char.isLower c = int2let ((let2int c + n) `mod` 26)
+encodeChar n c | Data.Char.isLower c = int2letLower ((let2int c + n) `mod` 26)
+               | Data.Char.isUpper c = int2letUpper ((let2int c + n) `mod` 26)
                | otherwise = c
 
 encode :: Int -> String -> String
