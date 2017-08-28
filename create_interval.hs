@@ -17,4 +17,4 @@ acc_red (x:xs) (a, b)
 
 create_intervals :: [Integer] -> [(Integer, Integer)]
 create_intervals [] = []
-create_intervals (x:xs) = tail(acc_red (x:xs) (x, x))
+create_intervals (x:xs) = tail(acc_red (x:xs)(x, x))
